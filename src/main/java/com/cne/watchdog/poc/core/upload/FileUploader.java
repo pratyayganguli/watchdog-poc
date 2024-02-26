@@ -1,10 +1,10 @@
-package com.cne.watchdog.poc.core;
+package com.cne.watchdog.poc.core.upload;
 
 import com.cne.watchdog.poc.common.FileObject;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.UUID;
+import java.util.logging.Logger;
 
 
 /**
@@ -14,14 +14,16 @@ import java.util.UUID;
 
 public class FileUploader implements Uploader {
     private static final String CLOUD_DIR = "/home/pratyay/Desktop/workspace/java-workspace/watchdog-poc/src/main/resources/cloud";
+    private static final String fileName = "report";
+    private static final Logger LOGGER = Logger.getLogger(FileUploader.class.getName());
     @Override
     public void upload(FileObject fileObject) {
         try {
-            String fileName = UUID.randomUUID().toString();
             OutputStream  outputStream = new FileOutputStream(CLOUD_DIR.concat("/").concat(fileName));
             byte [] contents = fileObject.getFileInputStream().readAllBytes();
             outputStream.write(contents);
             outputStream.close();
+            LOGGER.info("upload successful");
         }
         catch (Exception e){
             throw new RuntimeException("upload failed");

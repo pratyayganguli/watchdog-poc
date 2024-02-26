@@ -1,4 +1,4 @@
-package com.cne.watchdog.poc.core;
+package com.cne.watchdog.poc.core.upload;
 
 import com.cne.watchdog.poc.common.FileObject;
 
